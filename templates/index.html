@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung Cancer Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lung Cancer Detection</h1>
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Upload & Predict</button>
+        </form>
+
+        {% if filename %}
+            <div class="image-card">
+                <h2>Uploaded Image</h2>
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="uploaded-image">
+            </div>
+        {% endif %}
+
+        {% if prediction %}
+            <div class="prediction-box {% if 'No Lung Cancer' in prediction %} no-cancer {% else %} cancer {% endif %}">
+                <h2>Prediction Result</h2>
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
